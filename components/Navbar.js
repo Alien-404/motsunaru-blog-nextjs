@@ -37,13 +37,13 @@ export default function Navbar() {
         </button>
       </div>
       <ul
-        className={`absolute top-0 left-0 w-full bg-gray-100 min-h-full bg-opacity-90 flex flex-col justify-center space-y-10 text-center ${
+        className={`absolute top-0 left-0 w-full bg-gray-500 min-h-full bg-opacity-90 flex flex-col justify-center space-y-10 text-center ${
           isShow ? 'block' : 'hidden'
         } lg:hidden z-20`}
       >
         <li>
           <Link href={'/'}>
-            <a className='border-b border-gray-800 border-opacity-0 hover:border-opacity-100'>
+            <a className='border-b border-gray-800 border-opacity-0 hover:border-opacity-100 text-slate-200'>
               Dashboard
             </a>
           </Link>
