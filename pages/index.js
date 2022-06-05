@@ -2,9 +2,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 import Layout from '../components/Layout';
 import Blog from '../components/Blog';
 
-const graphcms = new GraphQLClient(
-  'https://api-ap-southeast-2.graphcms.com/v2/cl3zig4wl1e1n01xjeemi0mg6/master'
-);
+const graphcms = new GraphQLClient(process.env.GRAPH_CLIENT);
 
 const query = gql`
   {
