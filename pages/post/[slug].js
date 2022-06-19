@@ -3,6 +3,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 import Image from 'next/image';
 import Layout from '../../components/Layout';
 import moment from 'moment';
+import PostSkeleton from '../../components/PostSkeleton';
 
 const graphcms = new GraphQLClient(process.env.GRAPH_CLIENT);
 
@@ -36,6 +37,8 @@ const slugList = gql`
 `;
 
 export default function PostDetail({ post }) {
+  if (!post) return <PostSkeleton />;
+
   const { title, author, datePublished, content, coverPhoto } = post;
   return (
     <Layout title={`Motsunaru | ${title}`}>
@@ -90,6 +93,15 @@ export async function getStaticProps({ params }) {
   const data = await graphcms.request(query, { slug });
   const post = data.post;
 
+  if (post === null) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       post,
@@ -108,5 +120,5 @@ export async function getStaticPaths() {
   const paths = posts.map((post) => ({
     params: { slug: post.slug },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
